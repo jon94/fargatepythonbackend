@@ -4,11 +4,11 @@
 
 FROM python:3.7
 
-WORKDIR /usr/src/app
+WORKDIR /flask_backend
 
 #install dependencies first so they can be cached
 
-COPY requirements.txt /usr/src/app/requirements.txt 
+COPY requirements.txt /flask_backend/requirements.txt 
 #package*.json./
 
 RUN pip3 install -r requirements.txt
