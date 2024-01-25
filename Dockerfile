@@ -30,4 +30,4 @@ ENV DD_GIT_COMMIT_SHA=${DD_GIT_COMMIT_SHA}
 ENTRYPOINT ["ddtrace-run"]
 CMD ["ddtrace-run", "python3", "application.py"] 
 
-#this is the command that will be executed when the container is run
+#this is the command that will be executed when the container is run 
