@@ -22,6 +22,6 @@ ENV PORT=5500
 EXPOSE 5500
 
 ENTRYPOINT ["ddtrace-run"]
-CMD ["ddtrace-run", "python3", "application.py"]
+CMD ["ddtrace-run", "python3", "application.py"] 
 
 #this is the command that will be executed when the container is run
