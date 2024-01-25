@@ -3,6 +3,8 @@
 #Instructions to run the docker image
 
 FROM python:3.7
+USER 0
+RUN mkdir -p /flask_backend
 WORKDIR /flask_backend
 
 #install dependencies first so they can be cached
