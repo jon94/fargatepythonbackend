@@ -3,13 +3,12 @@
 #Instructions to run the docker image
 
 FROM python:3.7
-USER 0
-RUN mkdir -p /flask_backend
-WORKDIR /flask_backend
+
+WORKDIR /usr/src/app
 
 #install dependencies first so they can be cached
 
-COPY requirements.txt /flask_backend/requirements.txt 
+COPY requirements.txt /usr/src/app/requirements.txt 
 #package*.json./
 
 RUN pip3 install -r requirements.txt
