@@ -19,7 +19,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Setup Python
-      uses: actions/setup-python@v5.0.0
+      uses: actions/setup-python@v5.0.0   
 
     - name: Check code meets quality standards
       id: datadog-static-analysis
@@ -28,7 +28,7 @@ jobs:
         dd_app_key: ${{ secrets.DD_APP_KEY }}
         dd_api_key: ${{ secrets.DD_API_KEY }}
         dd_service: fargate-ecs-backend
-        dd_env: "ci"  
+        dd_env: ci 
         cpu_count: 2
         enable_performance_statistics: false
 
