@@ -27,10 +27,20 @@ jobs:
       with:
         dd_app_key: ${{ secrets.DD_APP_KEY }}
         dd_api_key: ${{ secrets.DD_API_KEY }}
-        dd_service: "fargate-ecs-backend"
+        dd_service: fargate-ecs-backend
         dd_env: "ci"  
         cpu_count: 2
         enable_performance_statistics: false
+
+    - name: Check imported libraries are secure and compliant (DD SBOM Generate and Upload)
+      id: datadog-software-composition-analysis
+      uses: DataDog/datadog-sca-github-action@main
+      with:
+        dd_api_key: ${{ secrets.DD_API_KEY }}
+        dd_app_key: ${{ secrets.DD_APP_KEY }}
+        dd_service: fargate-ecs-backend
+        dd_env: ci
+        dd_site: datadoghq.com
          
     - name: Build Docker Image
       uses: mr-smithers-excellent/docker-build-push@v4
