@@ -5,7 +5,6 @@ import requests as req
 import time
 import logging
 import sys
-import json
 
 FORMAT = ('%(asctime)s %(levelname)s [%(name)s] [%(filename)s:%(lineno)d] '
           '[dd.service=%(dd.service)s dd.env=%(dd.env)s dd.trace_id=%(dd.trace_id)s dd.span_id=%(dd.span_id)s] '
@@ -14,23 +13,10 @@ logging.basicConfig(stream=sys.stdout, format=FORMAT)
 log = logging.getLogger(__name__)
 log.level = logging.INFO
 
-# Use a custom formatter to format log messages as JSON
-class JsonFormatter(logging.Formatter):
-    def format(self, record):
-        log_dict = {
-            'message': super(JsonFormatter, self).format(record),
-        }
-        return json.dumps(log_dict)
-
-json_formatter = JsonFormatter()
-
-handler = logging.StreamHandler(sys.stdout)
-handler.setFormatter(json_formatter)
-log.addHandler(handler)
-
 requests = req.Session()
 application = Flask(__name__)
 CORS(application)
+tracer.configure(hostname='localhost', port=8126) #USE LOCAL HOST FOR FARGATE
 
 
 
