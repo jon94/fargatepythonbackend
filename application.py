@@ -23,10 +23,10 @@ tracer.configure(hostname='localhost', port=8126) #USE LOCAL HOST FOR FARGATE
 
 ## ASM User ID Tracking ##
 
-def generate_random_id():
-    return str(uuid.uuid4())
+# def generate_random_id():
+#     return str(uuid.uuid4())
 
-user_id = generate_random_id()
+user_id = "jon1994"
 
 set_user(tracer, user_id, name="John", email="test@test.com", scope="some_scope",
          role="manager", session_id="session_id", propagate=True)
