@@ -1,5 +1,7 @@
 from flask import Flask, request, jsonify, logging
 from ddtrace import tracer, patch; patch(logging=True)
+from ddtrace.contrib.trace_utils import set_user #for ASM user ID Tracking
+import uuid # generate random user id
 from flask_cors import CORS
 import requests as req
 import time
@@ -19,6 +21,15 @@ CORS(application)
 tracer.configure(hostname='localhost', port=8126) #USE LOCAL HOST FOR FARGATE
 
 
+## ASM User ID Tracking ##
+
+def generate_random_id():
+    return str(uuid.uuid4())
+
+user_id = generate_random_id()
+
+set_user(tracer, user_id, name="John", email="test@test.com", scope="some_scope",
+         role="manager", session_id="session_id", propagate=True)
 
 ## Routes ## 
 
