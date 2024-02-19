@@ -1,3 +1,6 @@
 {
-    "datadog.ust.environment.setup.focusedName": "fargate-ecs"
+    "datadog.ust.environment.setup.focusedName": "fargate-ecs",
+    "datadog.ust.service.setup.linkedNames": [
+        "fargate-python"
+    ]
 }
