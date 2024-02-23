@@ -64,7 +64,7 @@ jobs:
         # The version of the Datadog Service Catalog Schema. The default is v2. Valid values are `v2` and `v2.1`.
         schema-version: v2
         # The name of the service
-        service-name: fargate-python
+        service-name: fargate-python, postrequest
         # The team responsible for the service
         team: SRE
         # The email address of the team responsible for the service
