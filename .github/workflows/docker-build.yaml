@@ -42,15 +42,15 @@ jobs:
         dd_env: ci
         dd_site: datadoghq.com
           
-    # - name: Build Docker Image 
-    #   uses: mr-smithers-excellent/docker-build-push@v4
-    #   with:
-    #     image: ${{ env.DOCKER_REPOSITORY }}/${{ env.IMAGE_NAME }}
-    #     registry: docker.io
-    #     tag: latest
-    #     buildArgs: 'DD_GIT_REPOSITORY_URL=github.com/jon94/fargatepythonbackend,DD_GIT_COMMIT_SHA=$(git rev-parse HEAD)'
-    #     username: ${{ secrets.DOCKER_USERNAME }}
-    #     password: ${{ secrets.DOCKER_PASSWORD }}
+    - name: Build Docker Image 
+      uses: mr-smithers-excellent/docker-build-push@v4
+      with:
+        image: ${{ env.DOCKER_REPOSITORY }}/${{ env.IMAGE_NAME }}
+        registry: docker.io
+        tag: latest
+        buildArgs: 'DD_GIT_REPOSITORY_URL=github.com/jon94/fargatepythonbackend,DD_GIT_COMMIT_SHA=$(git rev-parse HEAD)'
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
 
     - name: Datadog Service Catalog Metadata Provider
       uses: arcxp/datadog-service-catalog-metadata-provider@v2.1.0
