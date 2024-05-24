@@ -4,3 +4,4 @@ rulesets:
   - python-design                   # check basic design rules
   - python-inclusive                # ensure that we use inclusive wording in our codebase
   - python-security                 # ensure your Python code is safe and secure
+  - python-flask                    # Rules specifically for Flask best practices and security.
