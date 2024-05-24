@@ -21,8 +21,9 @@ tracer.configure(hostname='localhost', port=8126) #USE LOCAL HOST FOR FARGATE
 
 
 ## ASM User ID Tracking ##
+## Use camelcase instead of snakecase for functions > pick up by Datadog SCA
 
-def generate_random_id():
+def generateRandomId():
     return str(uuid.uuid4())
 
 ## Routes ## 
@@ -41,7 +42,7 @@ def get_request():
 def post_request():
     log.info('post request called!')
     tracer.set_tags({'information': 'This is a custom value from a post request'})
-    tracer.set_tags({'usr.id': generate_random_id()})
+    tracer.set_tags({'usr.id': generateRandomId()})
     data = request.json
     database_query(data)
     return jsonify("The data sent was " + data)
