@@ -68,6 +68,6 @@ jobs:
         # The team responsible for the service
         team: SRE
         # The email address of the team responsible for the service
-        email: jonathan.lim@datadoghq.com 
+        email: jonathan.lim@datadoghq.com
 
           
