@@ -71,6 +71,10 @@ jobs:
         # The email address of the team responsible for the service
         email: jonathan.lim@datadoghq.com
 
+    - name: Set deploy start time
+      id: deploy_start
+      run: echo "deploy_start=$(date +%s)" >> $GITHUB_ENV        
+
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
@@ -85,10 +89,6 @@ jobs:
         echo "DD_SITE=datadoghq.com" >> $GITHUB_ENV
         echo "DD_API_KEY=${{ secrets.DD_API_KEY }}" >> $GITHUB_ENV
         
-    - name: Set deploy start time
-      id: deploy_start
-      run: echo "deploy_start=$(date +%s)" >> $GITHUB_ENV
-
     - name: Set Git Commit SHA
       id: git_commit_sha
       run: echo "git_commit_sha=$(git rev-parse HEAD)" >> $GITHUB_ENV        
@@ -97,7 +97,7 @@ jobs:
       run: |
         npx datadog-ci dora deployment --service fargate-python --env fargate-ecs \
           --started-at ${{ env.deploy_start }} --finished-at $(date +%s) \
-          --git-repository-url github.com/jon94/fargatepythonbackend \
+          --git-repository-url "https://github.com/jon94/fargatepythonbackend" \
           --git-commit-sha ${{ env.git_commit_sha }}
 
           
