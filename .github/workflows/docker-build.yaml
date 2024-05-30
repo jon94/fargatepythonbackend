@@ -96,8 +96,8 @@ jobs:
     - name: Report deployment to Datadog
       run: |
         npx datadog-ci dora deployment --service fargate-python --env fargate-ecs \
-          --started-at ${{ env.deploy_start }} --finished-at $(date +%s) \
+          --started-at ${{ env.deploy_start }} --finished-at $(env.date +%s) \
           --git-repository-url github.com/jon94/fargatepythonbackend \
-          --git-commit-sha $(git_commit_sha)     
+          --git-commit-sha $(env.git_commit_sha)     
 
           
