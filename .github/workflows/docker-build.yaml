@@ -56,7 +56,8 @@ jobs:
     - name: Set deploy start time # Assumes that deployment happens here. Start deployment time here.
       id: deploy_start
       run: |
-        echo "::set-output name=deploy_start::$(date +%s)" # Set deploy_start as an output     
+        echo "DEPLOY_START=$(date +%s)" >> $GITHUB_ENV # Set deploy_start in environment file
+        echo "$(date +%s)" # Print the value of deploy_start
 
     - name: Datadog Service Catalog Metadata Provider
       uses: arcxp/datadog-service-catalog-metadata-provider@v2.1.0
@@ -108,3 +109,4 @@ jobs:
           --started-at $DEPLOY_START --finished-at $DEPLOY_FINISH \
           --git-repository-url "https://github.com/jon94/fargatepythonbackend" \
           --git-commit-sha $GIT_COMMIT_SHA
+
