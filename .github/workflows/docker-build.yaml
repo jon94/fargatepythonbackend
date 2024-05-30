@@ -56,56 +56,55 @@ jobs:
     - name: Set deploy start time # Assumes that deployment happens here. Start deployment time here.
       id: deploy_start
       run: |
-       echo "deploy_start=$(date +%s)"
-       echo "deploy_start: ${{ steps.deploy_start.outputs.deploy_start }}" # Print the value of deploy_start       
+        echo "::set-output name=deploy_start::$(date +%s)" # Set deploy_start as an output     
 
-  #   - name: Datadog Service Catalog Metadata Provider
-  #     uses: arcxp/datadog-service-catalog-metadata-provider@v2.1.0
-  #     with:
-  #       datadog-hostname: api.datadoghq.com
-  #       datadog-key: ${{ secrets.DD_API_KEY }}
-  #       datadog-app-key: ${{ secrets.DD_APP_KEY }}
-  #       schema-version: v2
-  #       service-name: fargate-python, postrequest
-  #       team: SRE
-  #       email: jonathan.lim@datadoghq.com
+    - name: Datadog Service Catalog Metadata Provider
+      uses: arcxp/datadog-service-catalog-metadata-provider@v2.1.0
+      with:
+        datadog-hostname: api.datadoghq.com
+        datadog-key: ${{ secrets.DD_API_KEY }}
+        datadog-app-key: ${{ secrets.DD_APP_KEY }}
+        schema-version: v2
+        service-name: fargate-python, postrequest
+        team: SRE
+        email: jonathan.lim@datadoghq.com
 
-  # dora_deployment_frequency:
-  #   name: DORA - Deployment Frequency via dd cli
-  #   runs-on: ubuntu-latest
-  #   needs: build_test_push
-  #   steps:
-  #   - uses: actions/checkout@v2     
+  dora_deployment_frequency:
+    name: DORA - Deployment Frequency via dd cli
+    runs-on: ubuntu-latest
+    needs: build_test_push
+    steps:
+    - uses: actions/checkout@v2     
 
-  #   - name: Set up Node.js
-  #     uses: actions/setup-node@v2
-  #     with:
-  #       node-version: '14' # Specify the Node.js version you need
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14' # Specify the Node.js version you need
 
-  #   - name: Install Datadog CI dependency
-  #     run: npm install --save-dev @datadog/datadog-ci
+    - name: Install Datadog CI dependency
+      run: npm install --save-dev @datadog/datadog-ci
 
-  #   - name: Set up environment variables
-  #     run: |
-  #       echo "DD_BETA_COMMANDS_ENABLED=1" >> $GITHUB_ENV
-  #       echo "DD_SITE=datadoghq.com" >> $GITHUB_ENV
-  #       echo "DD_API_KEY=${{ secrets.DD_API_KEY }}" >> $GITHUB_ENV
+    - name: Set up environment variables
+      run: |
+        echo "DD_BETA_COMMANDS_ENABLED=1" >> $GITHUB_ENV
+        echo "DD_SITE=datadoghq.com" >> $GITHUB_ENV
+        echo "DD_API_KEY=${{ secrets.DD_API_KEY }}" >> $GITHUB_ENV
         
-  #   - name: Set Git Commit SHA
-  #     id: git_commit_sha
-  #     run: echo "git_commit_sha=$(git rev-parse HEAD)" >> $GITHUB_ENV        
+    - name: Set Git Commit SHA
+      id: git_commit_sha
+      run: echo "git_commit_sha=$(git rev-parse HEAD)" >> $GITHUB_ENV        
 
-  #   - name: Set deploy finish time
-  #     id: deploy_finish
-  #     run: echo "deploy_finish=$(date +%s)" >> $GITHUB_ENV
+    - name: Set deploy finish time
+      id: deploy_finish
+      run: echo "deploy_finish=$(date +%s)" >> $GITHUB_ENV
 
-  #   - name: Report deployment to Datadog
-  #     env:
-  #       DEPLOY_START: ${{ needs.build_test_push.outputs.deploy_start }} # using env variable from previous job
-  #       DEPLOY_FINISH: ${{ env.deploy_finish }}
-  #       GIT_COMMIT_SHA: ${{ env.git_commit_sha }}
-  #     run: |
-  #       npx datadog-ci dora deployment --service fargate-python --env fargate-ecs \
-  #         --started-at $DEPLOY_START --finished-at $DEPLOY_FINISH \
-  #         --git-repository-url "https://github.com/jon94/fargatepythonbackend" \
-  #         --git-commit-sha $GIT_COMMIT_SHA
+    - name: Report deployment to Datadog
+      env:
+        DEPLOY_START: ${{ needs.build_test_push.outputs.deploy_start }} # using env variable from previous job
+        DEPLOY_FINISH: ${{ env.deploy_finish }}
+        GIT_COMMIT_SHA: ${{ env.git_commit_sha }}
+      run: |
+        npx datadog-ci dora deployment --service fargate-python --env fargate-ecs \
+          --started-at $DEPLOY_START --finished-at $DEPLOY_FINISH \
+          --git-repository-url "https://github.com/jon94/fargatepythonbackend" \
+          --git-commit-sha $GIT_COMMIT_SHA
