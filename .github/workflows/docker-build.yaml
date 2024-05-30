@@ -94,9 +94,6 @@ jobs:
       id: git_commit_sha
       run: echo "git_commit_sha=$(git rev-parse HEAD)" >> $GITHUB_ENV        
 
-    - name: Delay to ensure timestamps are different
-      run: sleep 5
-
     - name: Set deploy finish time
       id: deploy_finish
       run: echo "deploy_finish=$(date +%s)" >> $GITHUB_ENV
