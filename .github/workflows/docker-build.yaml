@@ -13,7 +13,7 @@ jobs:
     permissions: write-all
     runs-on: ubuntu-latest 
     outputs:
-      deploy-start: ${{ steps.deploy_start.outputs.DEPLOY_START }}
+      deploy-start: ${{ steps.deploy_start.outputs.DEPLOY_START }}  # outputs for env variables to be used between jobs
     env:
       DOCKER_REPOSITORY: jonlimpw # name of Docker Hub ID
       IMAGE_NAME: fargatepybackend
@@ -58,11 +58,8 @@ jobs:
     - name: Set deploy start time # Assumes that deployment happens here. Start deployment time here.
       id: deploy_start
       run: |
-        echo "DEPLOY_START=$(date +%s)" >> $GITHUB_OUTPUT # Set deploy_start in environment file    
-    - name: Echo deploy start time
-      run: |
-        echo "Deploy start time: $DEPLOY_START" # Echo the value of DEPLOY_START        
-
+        echo "DEPLOY_START=$(date +%s)" >> $GITHUB_OUTPUT # Set deploy_start in environment file so it can be used across jobs   
+        
     - name: Datadog Service Catalog Metadata Provider
       uses: arcxp/datadog-service-catalog-metadata-provider@v2.1.0
       with:
