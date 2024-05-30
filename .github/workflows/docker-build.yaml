@@ -57,7 +57,9 @@ jobs:
       id: deploy_start
       run: |
         echo "DEPLOY_START=$(date +%s)" >> $GITHUB_ENV # Set deploy_start in environment file    
-        echo $DEPLOY_START
+    - name: Echo deploy start time
+      run: |
+        echo "Deploy start time: $DEPLOY_START" # Echo the value of DEPLOY_START        
 
   #   - name: Datadog Service Catalog Metadata Provider
   #     uses: arcxp/datadog-service-catalog-metadata-provider@v2.1.0
