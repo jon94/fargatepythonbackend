@@ -56,8 +56,7 @@ jobs:
     - name: Set deploy start time # Assumes that deployment happens here. Start deployment time here.
       id: deploy_start
       run: |
-        echo "DEPLOY_START=$(date +%s)" >> $GITHUB_ENV # Set deploy_start in environment file
-        echo "$(date +%s)" # Print the value of deploy_start
+        echo "DEPLOY_START=$(date +%s)" >> $GITHUB_ENV # Set deploy_start in environment file    
         echo $DEPLOY_START
 
   #   - name: Datadog Service Catalog Metadata Provider
