@@ -17,7 +17,7 @@ log.level = logging.INFO
 requests = req.Session()
 application = Flask(__name__)
 CORS(application)
-tracer.configure(hostname='localhost', port=8126) #USE LOCAL HOST FOR FARGATE
+tracer.configure(hostname='localhost', port=8126) #USE LOCAL HOST FOR FARGATE 
 
 
 ## ASM User ID Tracking ##
