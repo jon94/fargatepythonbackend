@@ -43,7 +43,18 @@ jobs:
         dd_app_key: ${{ secrets.DD_APP_KEY }}
         dd_service: fargate-ecs-backend
         dd_env: ci
-        dd_site: datadoghq.com
+        dd_site: datadoghq.com 
+        
+    - name: Install Datadog CLI
+      run: npm install --save-dev @datadog/datadog-ci
+
+    - name: Quality Gates
+      id: quality_gates
+      run: |
+        DD_SITE=datadoghq.com \
+        DD_API_KEY=${{ secrets.DD_API_KEY }} \
+        DD_APP_KEY=${{ secrets.DD_APP_KEY }} \
+        datadog-ci gate evaluate
           
     - name: Build Docker Image 
       uses: mr-smithers-excellent/docker-build-push@v4
