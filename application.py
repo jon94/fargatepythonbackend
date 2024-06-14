@@ -45,7 +45,7 @@ def post_request():
     tracer.set_tags({'usr.id': generateRandomId()})
     data = request.json
     database_query(data)
-    return json.dumps("The data sent was " + data) #simulate SCA violation by not using jsonify
+    return jsonify("The data sent was " + data) #simulate SCA violation by not using jsonify
 
 
 @application.route('/api/getErrorRequest', methods=['GET'])
