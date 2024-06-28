@@ -1,7 +1,10 @@
-rulesets: 
-  - python-best-practices           # ensure best practices are followed
-  - python-code-style               # code-style enforcement for Python
-  - python-design                   # check basic design rules
-  - python-inclusive                # ensure that we use inclusive wording in our codebase
-  - python-security                 # ensure your Python code is safe and secure
-  - python-flask                    # Rules specifically for Flask best practices and security.
+schema-version: v1
+rulesets:
+- python-best-practices
+- python-code-style
+- python-design
+- python-inclusive
+- python-security
+- python-flask
+- python-django
+- python-pandas
