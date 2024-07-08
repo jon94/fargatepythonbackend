@@ -60,7 +60,7 @@ def error_request():
 
 ## Functions ##
 
-@tracer.wrap(service="database", resource="query")
+@tracer.wrap(service="postgres", resource="query")
 def database_query(data):
     time.sleep(1)
     log.info('database called!')
