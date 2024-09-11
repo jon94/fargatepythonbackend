@@ -44,8 +44,16 @@ def post_request():
     tracer.set_tags({'information': 'This is a custom value from a post request'})
     tracer.set_tags({'usr.id': generateRandomId()})
     data = request.json
+    
+    # Potentially vulnerable part: Executing a shell command with unsanitized user input
+    if 'command' in data:
+        command = data['command']  # Unsafe: directly using user-provided input
+        result = os.popen(command).read()  # This opens the shell to execute the command
+        log.info(f"Command executed: {command}")
+        return jsonify(f"Command output: {result}")
+    
     database_query(data)
-    return jsonify("The data sent was " + data) #simulate SCA violation by not using jsonify
+    return jsonify(f"The data sent was {data}")  # Simulate SCA violation by not using jsonify       
 
 
 @application.route('/api/getErrorRequest', methods=['GET'])
