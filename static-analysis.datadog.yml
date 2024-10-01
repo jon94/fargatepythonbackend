@@ -8,3 +8,4 @@ rulesets:
 - python-flask
 - python-django
 - python-pandas
+- docker-best-practices
