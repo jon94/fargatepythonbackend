@@ -9,3 +9,4 @@ rulesets:
 - python-django
 - python-pandas
 - docker-best-practices
+- github-actions
