@@ -25,8 +25,6 @@ EXPOSE 5500
 ARG DD_GIT_COMMIT_SHA
 ENV DD_TAGS="git.repository_url:github.com/jon94/fargatepythonbackend,git.commit.sha:${DD_GIT_COMMIT_SHA}"
 
-
+#this is the command that will be executed when the container is run 
 ENTRYPOINT ["ddtrace-run"]
 CMD ["ddtrace-run", "python3", "application.py"] 
-
-#this is the command that will be executed when the container is run 
