@@ -112,6 +112,7 @@ jobs:
       run: echo "deploy_finish=$(date +%s)" >> $GITHUB_ENV
 
     - name: Report deployment to Datadog
+      shell: bash
       env:
         DEPLOY_START: ${{ needs.build_test_push.outputs.deploy-start }} # using env variable from previous job
         DEPLOY_FINISH: ${{ env.deploy_finish }}
